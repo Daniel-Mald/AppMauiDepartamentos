@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
+             x:Class="AppMauiDepartamentos.Views.PrincipalView"
+             Title="Actividades ITESRC" BackgroundColor="{StaticResource Gray900}">
+    
+    <Grid ColumnDefinitions=".8*, .1*,.1*,1*" RowDefinitions=".10* , .90*" >
+        <Button x:Name="Departamentos" Grid.Row="0" Grid.Column="1" Command="{Binding GoToDepartamentosCommand}" Text="VerDepartaments"
+                IsEnabled="{Binding Esadmin}"
+                IsVisible="{Binding Esadmin}">
+            
+        </Button>
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding VerAgregarCommand}" Text="Nueva actividad"></Button>
+
+        <Button Grid.Row="0" Grid.Column="3" Command="{Binding LogoutCommand}" Text="Logout"></Button>
+
+        <ScrollView Grid.Row="1">
+            <Grid>
+                <ListView  ItemsSource="{Binding Actividades}"  x:Name="Listas">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
+
+                                        <Label Grid.Column="1" Text="{Binding Titulo}" FontAttributes="Bold" />
+                                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding FechaRealizacion ,StringFormat='Fecha: {0:dd/MM/yyyy}'}" />
+                                        <Label Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="{Binding Descripcion}" />
+                                        <Button Margin="3" Grid.Column="3" Grid.Row="0" Text="Editar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEditarCommand}" CommandParameter="{Binding Id}"/>
+                                        <Button Margin="3" Grid.Column="3" Grid.Row="1" Text="Eliminar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Id}"/>
+
+                                    </Grid>
+                                </ViewCell.View>
+
+                            </ViewCell>
+
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </ScrollView>
+    </Grid>
+    
+</ContentPage>

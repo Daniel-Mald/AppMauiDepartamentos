@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMauiDepartamentos.Views.UpdateDepartamentoView"
+              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
+             Title="UpdateDepartamentoView">
+    <ContentPage.BindingContext>
+        <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Label Text="Titulo"/>
+        <Entry Text="{Binding Departamento.Nombre}"/>
+        <Label Text="Descripcion"/>
+        <Entry Text="{Binding Departamento.Password}"/>
+        <Label Text="Fecha a realizar"/>
+        <DatePicker Date="{Binding Departamento.UserName}"/>
+        <Picker ItemsSource="{Binding Departamentos}" SelectedItem="{Binding Departamento.Id}" ItemDisplayBinding="{Binding Nombre}">
+
+        </Picker>
+        <Button Command="{Binding EditarCommand}" Text="Agregar"></Button>
+
+    </VerticalStackLayout>
+</ContentPage>

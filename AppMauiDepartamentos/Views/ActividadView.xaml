@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMauiDepartamentos.Views.ActividadView"
+            BackgroundColor="{StaticResource Gray900}">
+    <Grid RowDefinitions=".1* , .1* , .65*  , .10*">
+        <Grid ColumnDefinitions="*,*,*" Margin="20">
+            <Image HorizontalOptions="Start" VerticalOptions="Center">
+                <Image.Source>
+                    <FontImageSource FontFamily="Icons" Glyph="&#xe800;" Size="20 " Color="{StaticResource Gray100}">
+                        
+                    </FontImageSource>
+                </Image.Source>
+            </Image>
+            <Label Grid.Column="1" 
+                   FontFamily="Arial"
+                   FontSize="15"
+                   HorizontalTextAlignment="Center"
+                   Text="Actividad"
+                   TextColor="{StaticResource Gray200}"
+                   VerticalOptions="Center"/>
+            <Image Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center">
+                <Image.Source>
+                    <FontImageSource FontFamily="Icons" Glyph="&#xe802;" Size="20 " Color="{StaticResource Gray100}">
+
+                    </FontImageSource>
+                </Image.Source>
+            </Image>
+
+
+        </Grid>
+        <Label Grid.Row="1" 
+               Margin="20,10,0,0"
+               FontSize="25"
+               Text="Nombre de la actividad"
+               TextColor="{StaticResource Gray100}">
+            
+            
+        </Label>
+        <Grid Grid.Row="2" ColumnDefinitions=".35*,.7*">
+            <Grid RowDefinitions="*,*,*,*,*">
+                <RoundRectangle Grid.RowSpan="5"
+                                CornerRadius="0,40,0,40"
+                                Fill="{StaticResource Gray501}"></RoundRectangle>
+                <Grid Margin="10,15,0,0" RowDefinitions="*,*">
+                    <Label FontSize="12" VerticalOptions="End"
+                           Text="Rate"
+                           TextColor="{StaticResource Gray200}"></Label>
+                    <Label FontSize="14" VerticalOptions="Start"
+                           Grid.Row="1"
+                           Text="La calificacion xd"
+                           TextColor="{StaticResource Gray100}"></Label>
+                </Grid>
+                <Grid Grid.Row="1" Margin="10,5,0,0" RowDefinitions="*,*">
+                    <Label FontSize="12" VerticalOptions="End"
+                           Text="Rate"
+                           TextColor="{StaticResource Gray200}"></Label>
+                    <Label FontSize="14" VerticalOptions="Start"
+                           Grid.Row="1"
+                           Text="La calificacion xd"
+                           TextColor="{StaticResource Gray100}"></Label>
+                </Grid>
+
+
+                <Grid Grid.Row="2" Margin="10,5,0,0" RowDefinitions="*,*">
+                    <Label FontSize="12" VerticalOptions="End"
+                           Text="nosexd"
+                           TextColor="{StaticResource Gray200}"></Label>
+                    <Label FontSize="14" VerticalOptions="Start"
+                           
+                           Grid.Row="1"
+                           Text="La calificacion xd"
+                           TextColor="{StaticResource Gray100}"></Label>
+                </Grid>
+
+                <Grid Grid.Row="3" Margin="10,5,0,0" RowDefinitions="*,*">
+                    <Label FontSize="12" VerticalOptions="End"
+                           Text="jj"
+                           TextColor="{StaticResource Gray200}"></Label>
+                    <Label FontSize="14" VerticalOptions="Start"
+                           Grid.Row="1"
+                           Text="La calificacion xd"
+                           TextColor="{StaticResource Gray100}"></Label>
+                </Grid>
+
+                <Grid Grid.Row="4" Margin="10,5,0,15" RowDefinitions="*,*">
+                    <Label FontSize="12" VerticalOptions="End"
+                           Text="ajio"
+                           TextColor="{StaticResource Gray200}"></Label>
+                    <Label FontSize="14" VerticalOptions="Start"
+                           Grid.Row="1"
+                           Text="La calificacion xd"
+                           TextColor="{StaticResource Gray100}"></Label>
+                </Grid>
+            </Grid>
+            <Label Grid.Column="1" Margin="5" LineBreakMode="WordWrap" TextColor="{StaticResource Gray500}"
+                   Text="La emoción inundaba el aire mientras el bullicio de los estudiantes llenaba los pasillos de la escuela. Era el día del evento anual más esperado: el Festival de Talentos. Desde temprano, los preparativos estaban en pleno apogeo, con alumnos y profesores trabajando juntos para asegurarse de que todo estuviera perfecto. En el escenario principal, los artistas afinaban sus instrumentos, los bailarines practicaban sus movimientos y los actores repasaban sus líneas una última vez. Mientras tanto, en los puestos de comida y actividades, los aromas tentadores y las risas animaban a todos a unirse a la diversión. Con cada momento que pasaba, la anticipación crecía, prometiendo una tarde llena de talento, creatividad y comunidad escolar.">
+                
+            </Label>
+        </Grid>
+        <Grid Grid.Row="3" ColumnDefinitions="*">
+            <Button Text="Modificar" Margin="10" VerticalOptions="Center" BackgroundColor="{StaticResource Gray200}"></Button>
+        </Grid>
+        
+    </Grid>
+    
+</ContentPage>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AppMauiDepartamentos.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:AppMauiDepartamentos"
+    xmlns:views="clr-namespace:AppMauiDepartamentos.Views"
+    xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
+    Shell.FlyoutBehavior="Disabled"
+    Title="AppMauiDepartamentos">
+    <Shell.BindingContext>
+        <vm:ActividadesViewModel></vm:ActividadesViewModel>
+    </Shell.BindingContext>
+    <ShellContent
+Title="Home"
+ContentTemplate="{DataTemplate views:LoginView}"
+Route="LoginView" />
+    <ShellContent
+       
+        ContentTemplate="{DataTemplate views:PrincipalView}"
+        Route="PrincipalView" />
+    <ShellContent
+    Title="Home"
+    ContentTemplate="{DataTemplate views:AddView}"
+    Route="AddView" />
+    <ShellContent
+    Title="Home"
+    ContentTemplate="{DataTemplate views:DeleteView}"
+    Route="DeleteView" />
+    <ShellContent
+    Title="Home"
+    ContentTemplate="{DataTemplate views:UpdateView}"
+    Route="UpdateView" />
+    
+    <ShellContent
+    Title="Home"
+    ContentTemplate="{DataTemplate views:ActividadView}"
+    Route="ActividadView" />
+    <ShellContent
+Title="Home"
+ContentTemplate="{DataTemplate views:AddDepartamentoView}"
+Route="AddDepartamentoView" />
+    <ShellContent
+Title="Home"
+ContentTemplate="{DataTemplate views:UpdateDepartamentoView}"
+Route="UpdateDepartamentoView" />
+    <ShellContent
+Title="Home"
+ContentTemplate="{DataTemplate views:DeleteDepartamentoView}"
+Route="DeleteDepartamentoView" />
+    <ShellContent
+Title="Home"
+ContentTemplate="{DataTemplate views:PrincipalDepartamentosView}"
+Route="PrincipalDepartamentosView" />
+
+</Shell>

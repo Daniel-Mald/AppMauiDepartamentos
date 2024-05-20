@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMauiDepartamentos.Views.DeleteDepartamentoView"
+              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
+             Title="DeleteDepartamentoView">
+    <ContentPage.BindingContext>
+        <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Label Text="Seguro que deseas eliminar "></Label>
+        <Label Text="{Binding Seleccionado.Nombre}"></Label>
+        <Grid ColumnDefinitions="*,*">
+            <Button Grid.Column="1" Text="Eliminar" Command="{Binding EliminarCommand}"></Button>
+            <Button Grid.Column="0" Text="Cancelar" Command="{Binding CancelarCommand}"></Button>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

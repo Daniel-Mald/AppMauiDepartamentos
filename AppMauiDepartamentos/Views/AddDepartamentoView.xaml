@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMauiDepartamentos.Views.AddDepartamentoView"
+              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
+             Title="AddDepartamentoView">
+    <ContentPage.BindingContext>
+        <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+        <Label Text="Nombre"/>
+        <Entry Text="{Binding Departamento.Nombre}"/>
+        <Label Text="Cntraseña"/>
+        <Entry Text="{Binding Departamento.Password}"/>
+        <Label Text="Username"/>
+        <Entry Text="{Binding Departamento.UserName}"/>
+
+        <Label Text="Superior"/>
+        <Picker  ItemsSource="{Binding Departamentos}" SelectedItem="{Binding DepartamentoTemporal, Mode=OneWay}" ItemDisplayBinding="{Binding Nombre}">
+    
+        </Picker>
+        <Button Command="{Binding AgregarCommand}" Text="Agregar"></Button>
+
+    </VerticalStackLayout>
+</ContentPage>
