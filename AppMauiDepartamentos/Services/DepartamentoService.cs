@@ -29,8 +29,8 @@ namespace AppMauiDepartamentos.Services
             _client = new()
             {
                 //cambiar
-                //BaseAddress = new Uri("https://apiregistroactividades.websitos256.com/")
-                BaseAddress = new Uri("https://localhost:44341")
+                BaseAddress = new Uri("https://apiregistroactividades.websitos256.com/")
+                //BaseAddress = new Uri("https://localhost:44341")
 
             };
             _actividadService = actividadService;
