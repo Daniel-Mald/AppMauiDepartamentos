@@ -8,9 +8,9 @@
     xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
     Shell.FlyoutBehavior="Disabled"
     Title="AppMauiDepartamentos">
-    <Shell.BindingContext>
+    <!--<Shell.BindingContext>
         <vm:ActividadesViewModel></vm:ActividadesViewModel>
-    </Shell.BindingContext>
+    </Shell.BindingContext>-->
     <ShellContent
 Title="Home"
 ContentTemplate="{DataTemplate views:LoginView}"

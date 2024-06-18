@@ -3,6 +3,7 @@ using AppMauiDepartamentos.Models.Entities;
 using AppMauiDepartamentos.Models.Validators;
 using AppMauiDepartamentos.Repositories;
 using AppMauiDepartamentos.Services;
+using AppMauiDepartamentos.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -17,16 +18,30 @@ namespace AppMauiDepartamentos.ViewModels
     public partial class DepartamentoViewModel:ObservableObject
     {
         Repository<Departamento> _repos = new();
-        DepartamentoService _service = new();
+        Repository<Actividad> _reposAct;
+
+        DepartamentoService _service;
         DepartamentoDTOValidator _validator;
+        DepartamentoEditarValidator _validatorEditar;
+        ActividadService _activationService;
         //LoginService _loginService;
-        public DepartamentoViewModel()
+        public DepartamentoViewModel(DepartamentoService ser ,ActividadService actividadService,
+            Repository<Actividad> ra)
         {
             //_repos = repository;
             //_service = service;
+            _service = ser;
+            _reposAct = ra;
             _validator = new(_repos);
+            _validatorEditar = new(_repos);
+            _activationService = actividadService;
+            App._departmentoService.AlActualizar += _departmentoService_AlActualizar;
+           // _service.AlActualizar += _service_AlActualizar;
+            ActualizarDepartamentos();
+        }
 
-            _service.AlActualizar += _service_AlActualizar;
+        private void _departmentoService_AlActualizar()
+        {
             ActualizarDepartamentos();
         }
 
@@ -37,7 +52,11 @@ namespace AppMauiDepartamentos.ViewModels
 
         [ObservableProperty]
         public DepartamentoDTO? departamento = new();
-        public DepartamentoDTO? DepartamentoTemporal { get; set; } = new(); 
+        [ObservableProperty]
+         Departamento? departamentoTemporal  = new();
+
+        [ObservableProperty]
+        Departamento? departamentoTemporal2 = new();
 
 
         [ObservableProperty]
@@ -45,36 +64,45 @@ namespace AppMauiDepartamentos.ViewModels
         [ObservableProperty]
         public Departamento? seleccionado;
 
-        public ObservableCollection<Departamento> Departamentos { get; set; } = new();
+        
+         public ObservableCollection<Departamento> Departamentos { get; set; } = new();
+        //public ObservableCollection<Departamento> Departamentos { get; set; } = new();
 
         void ActualizarDepartamentos()
         {
-            Departamentos.Clear();
-            var y = _repos.GetAll();
+            Departamentos = new();
+            var y =  _repos.GetAll();
             foreach (var l in y)
             {
                 Departamentos.Add(l);
             }
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(Departamentos));
         }
         void CambiarVista(string vista)
         {
+            //var nuevaVista = new PrincipalDepartamentosView();
+            //Shell.curr
             Shell.Current.GoToAsync(vista);
         }
         [RelayCommand]
         public void Cancelar()
         {
-            Departamento = null;
+            //var nuevaVista = new PrincipalDepartamentosView();
+            //var currentPage = Shell.Current.Navigation.NavigationStack.LastOrDefault();
+            //Shell.Current.Navigation.PushAsync(nuevaVista);
+            Shell.Current.GoToAsync("//PrincipalDepartamentosView");
+            Departamento = new();
+            DepartamentoTemporal = new();
             Seleccionado = null;
             Error = "";
-            ActualizarDepartamentos();
-            CambiarVista("//PrincipaDepartamentoslView");
+             ActualizarDepartamentos();
         }
         [RelayCommand]
         public void VerAgregarD()
         {
             Departamento = new();
-           // DepartamentoTemporal = new();
+            DepartamentoTemporal = new() { Id = 0};
+            //DepartamentoDTO x = (DepartamentoDTO)N;
             CambiarVista("//AddDepartamentoView");
         }
         [RelayCommand]
@@ -86,17 +114,18 @@ namespace AppMauiDepartamentos.ViewModels
                 {
 
                     var _result = _validator.Validate(Departamento);
-                    if (_result.IsValid)
+                    if (_result.IsValid )
                     {
 
 
-                        Departamento d = new()
+                        DepartamentoDTO d = new()
                         {
-                            UserName = Departamento.UserName,
+                            Username = Departamento.Username,
                             Nombre = Departamento.Nombre,
-                            //Password = Departamento.Password,
-
-                            SuperiorId = DepartamentoTemporal.Id
+                            Password = Departamento.Password,
+                            
+                            IdSuperior = DepartamentoTemporal.Id==0?null:DepartamentoTemporal.Id,
+                            DepartamentoSuperior = _repos.Get(DepartamentoTemporal.Id).Nombre
                         };
                         Seleccionado = null;
                         await _service.Add(d);
@@ -118,16 +147,31 @@ namespace AppMauiDepartamentos.ViewModels
         public void VerEditar(int id)
         {
             var n = _repos.Get(id);
-            if (n != null && Departamento!= null)
+            if(DepartamentoTemporal == null)
             {
-                Departamento.SuperiorId =n.SuperiorId;
-                Departamento.Nombre = n.Nombre;
-                Departamento.UserName = n.UserName;
-                Departamento.Password = "";
-                Departamento.Id = n.Id;
+                DepartamentoTemporal = new();
+            }
+            if (DepartamentoTemporal!= null)
+            {
+               
+                DepartamentoTemporal = n;
+                if(n.SuperiorId != n.SuperiorId || n.SuperiorId != 0 || n.SuperiorId != null)
+                {
+                    
+                    DepartamentoTemporal2= _repos.Get((int)n.SuperiorId);
+                }
+                //Departamento.IdSuperior =n.SuperiorId;
+                //Departamento.Nombre = n.Nombre;
+                //Departamento.Username = n.UserName;
+                //Departamento.Password = "";
+                //Departamento.Id = n.Id;
                 Error = "";
+                var nuevaVista = new UpdateDepartamentoView();
+                var currentPage = Shell.Current.Navigation.NavigationStack.LastOrDefault();
+                
+                //Shell.Current.Navigation.PushAsync(nuevaVista);
                 CambiarVista("//UpdateDepartamentoView");
-
+               
 
             }
         }
@@ -139,8 +183,19 @@ namespace AppMauiDepartamentos.ViewModels
                 if (Departamento != null)
                 {
                     //ActividadValidatorNoDTO _validator2 = new();
+                    var x = _repos.Get(DepartamentoTemporal.Id);
+                    Departamento.Username = DepartamentoTemporal.UserName;
+                    Departamento.Nombre = DepartamentoTemporal.Nombre;
+                    if(x.Id!= x.Id || x.Id!= 0)
+                    {
+                        
+                        Departamento.IdSuperior = DepartamentoTemporal2.Id;
+                    }
+                    
+                    Departamento.Id = DepartamentoTemporal.Id;
+                   
 
-                    var _result = _validator.Validate(Departamento);
+                    var _result = _validatorEditar.Validate(Departamento);
                     if (_result.IsValid)
                     {
                         //   LoginService _loginService = new(); // este service es de donde agarro el token
@@ -173,6 +228,10 @@ namespace AppMauiDepartamentos.ViewModels
             Seleccionado = _repos.Get(id);
             if (Seleccionado != null)
             {
+                //var nuevaVista = new DeleteDepartamentoView();
+                //var currentPage = Shell.Current.Navigation.NavigationStack.LastOrDefault();
+
+                //Shell.Current.Navigation.PushAsync(nuevaVista);
                 CambiarVista("//DeleteDepartamentoView");
 
             }
@@ -182,17 +241,22 @@ namespace AppMauiDepartamentos.ViewModels
         {
             if (Seleccionado != null)
             {
-
                 await _service.Delete(Seleccionado.Id);
-                CambiarVista("PrincipalDepartamentosView");
+                Cancelar();
                 ActualizarDepartamentos();
             }
 
         }
         [RelayCommand]
-        public void GoBack()
+        public async void GoBack()
         {
             CambiarVista("//PrincipalView");
+
+
+            bool Admin = await _service._loginService.EsAdmin();
+
+
+            await Shell.Current.GoToAsync($"//PrincipalView?EsAdmin={Admin}");
         }
         //[RelayCommand]
         //public void Logout()

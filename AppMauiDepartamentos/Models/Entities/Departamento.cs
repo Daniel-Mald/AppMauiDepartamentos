@@ -22,10 +22,10 @@ namespace AppMauiDepartamentos.Models.Entities
         public string Nombre { get; set; } = null!;
         [NotNull]
         public string UserName { get; set; } = null!;
-        
+
         [SQLiteNetExtensions.Attributes.ForeignKey(typeof(Departamento))]
-        public int SuperiorId { get; set; }
-        [ManyToOne]
+        public int? SuperiorId { get; set; }
+        [OneToMany]
         public Departamento? Superior { get; set; }
     }
 }

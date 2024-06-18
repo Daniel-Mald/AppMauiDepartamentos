@@ -2,17 +2,22 @@
 using AppMauiDepartamentos.Models.Entities;
 using AppMauiDepartamentos.Repositories;
 //using MetalPerformanceShaders;
+using Microsoft.Maui.Dispatching;
+
 
 //using Foundation;
 
 //using AuthenticationServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+//using Xamarin.Google.Crypto.Tink.Shaded.Protobuf;
 //using static UIKit.UIGestureRecognizer;
 
 namespace AppMauiDepartamentos.Services
@@ -20,42 +25,96 @@ namespace AppMauiDepartamentos.Services
     public class ActividadService
     {
         HttpClient _client;
-        Repository<Actividad> _repos = new() ;
-        LoginService _loginService = new();
-        public event Action? AlActualizar;
-        public ActividadService()
+        Repository<Actividad> _repos;
+        LoginService _loginService;
+        //public event Action? AlActualizar;
+        public event EventHandler? AlActualizar;
+        public event EventHandler<List<ActividadDTO>>? AlActualizarImagenes;
+
+        public ActividadService(LoginService ls , Repository<Actividad> ar)
         {
             //_repos = repos;
+            _loginService = ls;
+            _repos = ar;
             _client = new()
             {
                 //cambiar
-                BaseAddress = new Uri("https://localhost:44341/")
+                BaseAddress = new Uri("https://apiregistroactividades.websitos256.com/")
+                //BaseAddress = new Uri("https://localhost:44341")
+
             };
+            //_loginService.OnLogin += _loginService_OnLogin;
+            //App._loginService.OnLogin += _loginService_OnLogin1;
+            LimpiarActividades();
+        }
+        public List<ActividadDTO> listaImagen = new();
+     
+        public async Task LimpiarActividades()
+        {
+            try
+            {
+                //listaImagen.Clear();
+                List<Actividad> acts = _repos.GetAll().ToList();
+                foreach (var act in acts)
+                {
+                    _repos.Delete(act);
+                }
+                //await GetActividades();
+            }
+            catch (Exception ejeje)
+            {
+            }
         }
         public async Task GetActividades( )
         {
             try
             {
+                //if (_loginService.NewLoged)
+                //{
+                //    //checar si jala
+                //     await LimpiarActividades();
+                //    _loginService.NewLoged = false;
+                //}
                 var _fecha = Preferences.Get("UltimaActualizacion", DateTime.MinValue);
                 bool _aviso = false;
                 var token = await _loginService.GetToken();
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                int y =await _loginService.GetDepartamentoId();
 
-                //cambiar
+                //HttpResponseMessage response = await _client.GetAsync("api/Actividades/departamentos");
+                //if(response.StatusCode == HttpStatusCode.NotFound)
+                //{
+                //    await LimpiarActividades();
+                //}
+                
                 var _response = await _client.GetFromJsonAsync<List<ActividadDTO>>($"api/Actividades/departamentos");
-                //var r = _response.FirstOrDefault(x => x.Id == 108);
-                //if (r != null) { var tr = 3; }
+                
                 if (_response != null)
                 {
+                    
                     int numero = _response.Count;
+                   if (numero < _repos.GetAll().Count())
+                    {
+                        await LimpiarActividades();
+                        _aviso = true;
+                        
+                    }
+
+                    
                     for (int i = 0; i < numero; i++)
                     {
+                        
                         var item = _response[i];
                         var _entity = _repos.Get(item.Id);
+                        //if (item.Id == null || item.Id == 0 || item.IdDepartamento == null || item.IdDepartamento == 0)
+                        //{
+                        //    int x = 4;
+                        //}
                         //if (r.Id == item.Id)
                         //{ int t = 2; }
                         if (_entity == null && item.Estado != 2)
                         {
+                            
                             _entity = new()
                             {
                                 Id = item.Id,
@@ -64,9 +123,10 @@ namespace AppMauiDepartamentos.Services
                                 Descripcion = item.Descripcion??"",
                                 Estado = item.Estado,
                                 FechaCreacion = item.FechaCreacion,
-                                Titulo = item.Titulo,
+                                Titulo = item.Titulo??"",
                                 FechaRealizacion = item.FechaRealizacion ?? DateTime.Now
                             };
+                            //listaImagen.Add(item);
                             _repos.Insert(_entity);
                             _aviso = true;
                         }
@@ -77,6 +137,7 @@ namespace AppMauiDepartamentos.Services
                                 if (item.Estado == 2)
                                 {
                                     _repos.Delete(_entity);
+                                    
                                     _aviso = true;
                                 }
                                 else
@@ -88,10 +149,13 @@ namespace AppMauiDepartamentos.Services
                                     {
                                         _entity.Titulo = item.Titulo;
                                         _entity.Estado = item.Estado;
-                                        _entity.Descripcion = item.Descripcion;
+                                        _entity.Descripcion = item.Descripcion??"";
                                         _entity.FechaActualizacion = item.FechaActualizacion;
-                                        _entity.FechaRealizacion = item.FechaRealizacion?? DateTime.Now;
+                                        _entity.FechaRealizacion = item.FechaRealizacion;
                                         _repos.Update(_entity);
+                                        //listaImagen.Remove(item);
+                                        //ActividadDTO s= listaImagen.FirstOrDefault(x => x.Id == item.Id);
+                                        
                                         _aviso = true;
                                     }
                                 }
@@ -100,16 +164,27 @@ namespace AppMauiDepartamentos.Services
                     }
                     if (_aviso)
                     {
+                        foreach (var item in _response)
+                        {
+                            listaImagen.Add(item);
+                        }
+                        //Application.Current.Dispatcher.Dispatch(() =>
+                        //{
+                        //    AlActualizar?.Invoke(this,EventArgs.Empty);
+
+                        //});
                         _ = MainThread.InvokeOnMainThreadAsync(() =>
                         {
-                            AlActualizar?.Invoke();
-                        });
-                        Application.Current.Dispatcher.Dispatch(() =>
-                        {
-                            AlActualizar?.Invoke();
+                            AlActualizar?.Invoke(this, EventArgs.Empty);
 
                         });
-                        AlActualizar?.Invoke();
+                        _ = MainThread.InvokeOnMainThreadAsync(() =>
+                        {
+                            AlActualizarImagenes?.Invoke(this, listaImagen);
+
+                        });
+                        //AlActualizar?.Invoke(this, null);
+
 
                     }
                     Preferences.Set("UltimaActualizacion", _response.Max(x => x.FechaActualizacion));
@@ -119,6 +194,10 @@ namespace AppMauiDepartamentos.Services
                     //foreach (var item in _response)
                     //{ }
                         
+                }
+                else
+                {
+
                 }
 
             }
@@ -173,6 +252,28 @@ namespace AppMauiDepartamentos.Services
                     await GetActividades();
 
                 }
+            }
+            
+
+        }
+        public async Task<ActividadDTO?> GetActividad(int id)
+        {
+            try
+            {
+                var token = await _loginService.GetToken();
+                var iddep = await _loginService.GetDepartamentoId(); //El id de departameto
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var _response = await _client.GetFromJsonAsync<ActividadDTO>($"api/Actividades/{id}");
+                if (_response != null)
+                {
+                    return _response;
+                }
+                return null;
+            }
+            catch (Exception c)
+            {
+                return null;
+               
             }
             
 

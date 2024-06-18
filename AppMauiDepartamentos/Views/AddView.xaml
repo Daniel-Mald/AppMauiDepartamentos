@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMauiDepartamentos.Views.AddView"
+             xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              Title="AddView">
+    <!--<ContentPage.BindingContext>
+        <vm:ActividadesViewModel></vm:ActividadesViewModel>
+    </ContentPage.BindingContext>-->
     <VerticalStackLayout>
         <Label Text="Titulo"/>
         <Entry Text="{Binding Actividad.Titulo}"/>
@@ -10,7 +14,14 @@
         <Entry Text="{Binding Actividad.Descripcion}"/>
         <Label Text="Fecha a realizar"/>
         <DatePicker Date="{Binding Actividad.FechaRealizacion}"/>
+        <VerticalStackLayout>
+            <Button Text="Seleccionar Imagen" Clicked="Button_Clicked"/>
+            <Image x:Name="SelectedImage"  WidthRequest="200" HeightRequest="200"/>
+            <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
+        </VerticalStackLayout>
         <Button Command="{Binding AgregarCommand}" Text="Agregar"></Button>
+        <Button Command="{Binding CancelarCommand}" Text="Cancelar"></Button>
+
 
     </VerticalStackLayout>
 </ContentPage>

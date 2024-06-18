@@ -20,12 +20,12 @@ namespace AppMauiDepartamentos.ViewModels
         string error = "";
         [ObservableProperty]
         LoginDTO dto;
-        public LoginViewModel()
+        public LoginViewModel(ActividadService ss)
         {
             dto = new();
             _service = new() ;
             _service.Logout();
-            _serviceActividad = new ActividadService();
+            _serviceActividad = ss;
         }
         [RelayCommand]
         public async Task Login()
@@ -35,8 +35,8 @@ namespace AppMauiDepartamentos.ViewModels
             if (respuesta)
             {
                 //App._thread.Start();
-                _service.ReiniciarHilo();
-                await _serviceActividad.GetActividades();
+                LoginService.ReiniciarHilo();
+                //await _serviceActividad.GetActividades();
                 //if(_vm != null)
                 //await _vm.ChecarSiEsAdmin();
                 int id = await _service.GetDepartamentoId();
@@ -47,11 +47,13 @@ namespace AppMauiDepartamentos.ViewModels
                 }
                 
                 await Shell.Current.GoToAsync($"//PrincipalView?EsAdmin={Admin}");
+                Dto = new();
             }
             else
             {
                 
                 Error = "Credenciales incorrectas";
+               // Dto = new();
             }
         }
     }

@@ -4,9 +4,9 @@
              x:Class="AppMauiDepartamentos.Views.LoginView"
              xmlns:vm ="clr-namespace:AppMauiDepartamentos.ViewModels"
              Title="LoginView">
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:LoginViewModel></vm:LoginViewModel>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <VerticalStackLayout>
         <Label 
            Text="Username"/>

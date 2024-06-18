@@ -4,9 +4,9 @@
              x:Class="AppMauiDepartamentos.Views.DeleteDepartamentoView"
               xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              Title="DeleteDepartamentoView">
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <VerticalStackLayout>
         <Label Text="Seguro que deseas eliminar "></Label>
         <Label Text="{Binding Seleccionado.Nombre}"></Label>

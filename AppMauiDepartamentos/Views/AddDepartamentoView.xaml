@@ -4,22 +4,32 @@
              x:Class="AppMauiDepartamentos.Views.AddDepartamentoView"
               xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              Title="AddDepartamentoView">
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <VerticalStackLayout>
         <Label Text="Nombre"/>
         <Entry Text="{Binding Departamento.Nombre}"/>
-        <Label Text="Cntraseña"/>
+        <Label Text="Contraseña"/>
         <Entry Text="{Binding Departamento.Password}"/>
         <Label Text="Username"/>
-        <Entry Text="{Binding Departamento.UserName}"/>
+        <Entry Text="{Binding Departamento.Username}"/>
 
         <Label Text="Superior"/>
-        <Picker  ItemsSource="{Binding Departamentos}" SelectedItem="{Binding DepartamentoTemporal, Mode=OneWay}" ItemDisplayBinding="{Binding Nombre}">
+        <Picker  ItemsSource="{Binding Departamentos}" SelectedItem="{Binding DepartamentoTemporal}" ItemDisplayBinding="{Binding Nombre}">
     
-        </Picker>
+        </Picker>   
+        <!--<ListView ItemsSource="{Binding Departamentos}" HeightRequest="100" SelectedItem="{Binding DepartamentoTemporal}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Nombre}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+
         <Button Command="{Binding AgregarCommand}" Text="Agregar"></Button>
+        <Button Command="{Binding CancelarCommand}" Text="Cancelar"></Button>
+
 
     </VerticalStackLayout>
 </ContentPage>

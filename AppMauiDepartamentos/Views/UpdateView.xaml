@@ -10,6 +10,11 @@
         <Entry Text="{Binding Seleccionado.Descripcion}"/>
         <Label Text="Fecha a realizar"/>
         <DatePicker Date="{Binding Seleccionado.FechaRealizacion}"/>
+        <VerticalStackLayout>
+            <Button Text="Seleccionar Imagen" Clicked="Button_Clicked"/>
+            <Image x:Name="SelectedImage"  WidthRequest="200" HeightRequest="200"/>
+            <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
+        </VerticalStackLayout>
         <Button Command="{Binding EditarCommand}" Text="Guardar cambios"></Button>
         <Button Command="{Binding CancelarCommand}" Text="Cancelar"></Button>
     </VerticalStackLayout>

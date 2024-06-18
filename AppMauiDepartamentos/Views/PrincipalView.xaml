@@ -5,7 +5,7 @@
              x:Class="AppMauiDepartamentos.Views.PrincipalView"
              Title="Actividades ITESRC" BackgroundColor="{StaticResource Gray900}">
     
-    <Grid ColumnDefinitions=".8*, .1*,.1*,1*" RowDefinitions=".10* , .90*" >
+    <Grid ColumnDefinitions=".2*, .2*,.2*,2*" RowDefinitions=".10* , .90*" >
         <Button x:Name="Departamentos" Grid.Row="0" Grid.Column="1" Command="{Binding GoToDepartamentosCommand}" Text="VerDepartaments"
                 IsEnabled="{Binding Esadmin}"
                 IsVisible="{Binding Esadmin}">
@@ -13,15 +13,15 @@
         </Button>
         <Button Grid.Row="0" Grid.Column="2" Command="{Binding VerAgregarCommand}" Text="Nueva actividad"></Button>
 
-        <Button Grid.Row="0" Grid.Column="3" Command="{Binding LogoutCommand}" Text="Logout"></Button>
+        <Button Grid.Row="0" Grid.Column="4" Command="{Binding LogoutCommand}" Text="Logout"></Button>
 
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
             <Grid>
-                <ListView  ItemsSource="{Binding Actividades}"  x:Name="Listas">
-                    <ListView.ItemTemplate>
+                <CollectionView  ItemsSource="{Binding Actividades}"  x:Name="Listas">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.View>
+                            <!--<ViewCell>
+                                <ViewCell.View>-->
                                     <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
 
                                         <Label Grid.Column="1" Text="{Binding Titulo}" FontAttributes="Bold" />
@@ -31,13 +31,13 @@
                                         <Button Margin="3" Grid.Column="3" Grid.Row="1" Text="Eliminar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Id}"/>
 
                                     </Grid>
-                                </ViewCell.View>
+                                <!--</ViewCell.View>
 
-                            </ViewCell>
+                            </ViewCell>-->
 
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
         </ScrollView>
     </Grid>

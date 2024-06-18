@@ -4,20 +4,22 @@
              x:Class="AppMauiDepartamentos.Views.UpdateDepartamentoView"
               xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              Title="UpdateDepartamentoView">
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <VerticalStackLayout>
-        <Label Text="Titulo"/>
-        <Entry Text="{Binding Departamento.Nombre}"/>
-        <Label Text="Descripcion"/>
-        <Entry Text="{Binding Departamento.Password}"/>
-        <Label Text="Fecha a realizar"/>
-        <DatePicker Date="{Binding Departamento.UserName}"/>
-        <Picker ItemsSource="{Binding Departamentos}" SelectedItem="{Binding Departamento.Id}" ItemDisplayBinding="{Binding Nombre}">
+        <Label Text="Departamento"/>
+        <Entry Text="{Binding DepartamentoTemporal.Nombre}"/>
+        <Label Text="Username"/>
+        <Entry Text="{Binding DepartamentoTemporal.UserName}"/>
+        
+        
+        
+        <Picker ItemsSource="{Binding Departamentos}" SelectedItem="{Binding DepartamentoTemporal2}" ItemDisplayBinding="{Binding Nombre}">
 
         </Picker>
-        <Button Command="{Binding EditarCommand}" Text="Agregar"></Button>
+        <Button Command="{Binding EditarCommand}" CommandParameter="{Binding Departamento.Id}" Text="Guardar"></Button>
+        <Button Command="{Binding CancelarCommand}"  Text="Cancelar"></Button>
 
     </VerticalStackLayout>
 </ContentPage>

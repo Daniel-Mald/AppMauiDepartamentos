@@ -16,7 +16,7 @@ namespace AppMauiDepartamentos.Repositories
 
         public Repository()
         {
-            string _ruta = FileSystem.AppDataDirectory + "/departament.db3";
+            string _ruta = FileSystem.AppDataDirectory + "/departamenttt.db3";
             _context = new SQLiteConnection(_ruta);
             _context.CreateTable<T>();
         }

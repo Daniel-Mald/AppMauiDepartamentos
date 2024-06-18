@@ -4,20 +4,19 @@
              x:Class="AppMauiDepartamentos.Views.PrincipalDepartamentosView"
              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              Title="PrincipalDepartamentosView">
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <Grid ColumnDefinitions=".8*, .1*,.1*" RowDefinitions=".10* , .90*">
         <Button Grid.Row="0" Grid.Column="1" Command="{Binding VerAgregarDCommand}" Text="Nuevo departamento"></Button>
         <Button Grid.Row="0" Grid.Column="2" Command="{Binding GoBackCommand}" Text="Atras"></Button>
 
         <ScrollView Grid.Row="1">
             <Grid>
-                <ListView  ItemsSource="{Binding Departamentos}"  x:Name="Listas">
-                    <ListView.ItemTemplate>
+                <CollectionView  ItemsSource="{Binding Departamentos }"  x:Name="Listas">
+                    <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.View>
+                            
                                     <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
 
                                         <Label Grid.Column="1" Text="{Binding Nombre}" FontAttributes="Bold" />
@@ -27,13 +26,11 @@
                                         <Button Margin="3" Grid.Column="3" Grid.Row="1" Text="Eliminar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Id}"/>
 
                                     </Grid>
-                                </ViewCell.View>
-
-                            </ViewCell>
+                               
 
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
         </ScrollView>
     </Grid>
