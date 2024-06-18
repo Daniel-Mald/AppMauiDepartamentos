@@ -45,24 +45,24 @@ namespace AppMauiDepartamentos.ViewModels
             EsAdministrador();
             // _service.AlActualizar += _service_AlActualizar;
             App._service.AlActualizar += _service_AlActualizar2;
-            App._service.AlActualizarImagenes += _service_AlActualizarImagenes;
+           // App._service.AlActualizarImagenes += _service_AlActualizarImagenes;
             //_service.AlActualizar += _service_AlActualizar1;
            // _service.AlActualizar += _service_AlActualizar1;
             ActualizarActividades(false);
         }
 
-        private void _service_AlActualizarImagenes(object? sender, List<ActividadDTO> e)
-        {
-            ActividadesImg.Clear();
-            foreach (var item in e)
-            {
-                var x = new ActividadConImagen
-                {
-                    Actividad = item,
-                    Imagen = ConvertirImagen(item.Imagen)
-                };
-            }
-        }
+        //private void _service_AlActualizarImagenes(object? sender, List<ActividadDTO> e)
+        //{
+        //    ActividadesImg.Clear();
+        //    foreach (var item in e)
+        //    {
+        //        var x = new ActividadConImagen
+        //        {
+        //            Actividad = item,
+        //            Imagen = ConvertirImagen(item.Imagen)
+        //        };
+        //    }
+        //}
         public  ImageSource? ConvertirImagen(string base64Image)
         {
             if (string.IsNullOrEmpty(base64Image))

@@ -164,10 +164,10 @@ namespace AppMauiDepartamentos.Services
                     }
                     if (_aviso)
                     {
-                        foreach (var item in _response)
-                        {
-                            listaImagen.Add(item);
-                        }
+                        //foreach (var item in _response)
+                        //{
+                        //    listaImagen.Add(item);
+                        //}
                         //Application.Current.Dispatcher.Dispatch(() =>
                         //{
                         //    AlActualizar?.Invoke(this,EventArgs.Empty);
@@ -178,11 +178,11 @@ namespace AppMauiDepartamentos.Services
                             AlActualizar?.Invoke(this, EventArgs.Empty);
 
                         });
-                        _ = MainThread.InvokeOnMainThreadAsync(() =>
-                        {
-                            AlActualizarImagenes?.Invoke(this, listaImagen);
+                        //_ = MainThread.InvokeOnMainThreadAsync(() =>
+                        //{
+                        //    AlActualizarImagenes?.Invoke(this, listaImagen);
 
-                        });
+                        //});
                         //AlActualizar?.Invoke(this, null);
 
 

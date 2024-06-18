@@ -5,7 +5,7 @@
              x:Class="AppMauiDepartamentos.Views.PrincipalView"
              Title="Actividades ITESRC" BackgroundColor="{StaticResource Gray900}">
     
-    <Grid ColumnDefinitions=".2*, .2*,.2*,2*" RowDefinitions=".10* , .90*" >
+    <Grid ColumnDefinitions=".25*,.25*,.25*,.25*" RowDefinitions=".10* , .90*" >
         <Button x:Name="Departamentos" Grid.Row="0" Grid.Column="1" Command="{Binding GoToDepartamentosCommand}" Text="VerDepartaments"
                 IsEnabled="{Binding Esadmin}"
                 IsVisible="{Binding Esadmin}">
@@ -20,8 +20,7 @@
                 <CollectionView  ItemsSource="{Binding Actividades}"  x:Name="Listas">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <!--<ViewCell>
-                                <ViewCell.View>-->
+                           
                                     <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
 
                                         <Label Grid.Column="1" Text="{Binding Titulo}" FontAttributes="Bold" />
