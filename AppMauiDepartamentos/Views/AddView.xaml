@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMauiDepartamentos.Views.AddView"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:helpers="clr-namespace:AppMauiDepartamentos.Helpers"
              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              Title="AddView">
     <!--<ContentPage.BindingContext>
@@ -19,8 +21,9 @@
             <Image x:Name="SelectedImage"  WidthRequest="200" HeightRequest="200"/>
             <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
         </VerticalStackLayout>
-        <Button Command="{Binding AgregarCommand}" Text="Agregar"></Button>
+        <Button Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=False}" Text="publicar"></Button>
         <Button Command="{Binding CancelarCommand}" Text="Cancelar"></Button>
+        <Button Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=True}" Text="Guardar como borrador"></Button>
 
 
     </VerticalStackLayout>

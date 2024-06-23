@@ -44,6 +44,10 @@ namespace AppMauiDepartamentos
             //{
             //    BindingContext = x.GetRequiredService<ActividadesViewModel>()
             //});
+            //builder.Services.AddSingleton<DeleteView>(x => new DeleteView()
+            //{
+            //    BindingContext = x.GetRequiredService<ActividadesViewModel>()
+            //});
             builder.Services.AddSingleton<PrincipalView>(x => new PrincipalView()
             {
                 BindingContext = x.GetRequiredService<ActividadesViewModel>()

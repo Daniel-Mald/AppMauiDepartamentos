@@ -40,8 +40,9 @@ namespace AppMauiDepartamentos.ViewModels
                 //if(_vm != null)
                 //await _vm.ChecarSiEsAdmin();
                 int id = await _service.GetDepartamentoId();
+                var idsuperior =await _service.GetIdSuperior();
                 bool Admin = false;
-                if(id == 1)
+                if(id == 1|| idsuperior == "")
                 {
                     Admin = true;
                 }

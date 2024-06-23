@@ -52,5 +52,9 @@ Route="DeleteDepartamentoView" />
 Title="Home"
 ContentTemplate="{DataTemplate views:PrincipalDepartamentosView}"
 Route="PrincipalDepartamentosView" />
+    <ShellContent
+Title="Home"
+ContentTemplate="{DataTemplate views:MisBorradoresView}"
+Route="MisBorradoresView" />
 
 </Shell>

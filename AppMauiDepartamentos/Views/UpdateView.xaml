@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:helpers="clr-namespace:AppMauiDepartamentos.Helpers"
+
              x:Class="AppMauiDepartamentos.Views.UpdateView"
              Title="UpdateView">
     <VerticalStackLayout>
@@ -15,7 +17,9 @@
             <Image x:Name="SelectedImage"  WidthRequest="200" HeightRequest="200"/>
             <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
         </VerticalStackLayout>
-        <Button Command="{Binding EditarCommand}" Text="Guardar cambios"></Button>
+        <Button Command="{Binding EditarCommand}" Text="Guardar cambios" CommandParameter="{helpers:BoolExtension Value=False}"></Button>
+        <Button Command="{Binding EditarCommand}" Text="Publicar" IsVisible="{Binding EsBorrador}" CommandParameter="{helpers:BoolExtension Value=True}"></Button>
+
         <Button Command="{Binding CancelarCommand}" Text="Cancelar"></Button>
     </VerticalStackLayout>
 </ContentPage>

@@ -176,14 +176,14 @@ namespace AppMauiDepartamentos.Services
             var token = await _loginService.GetToken();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var actividades = _reposActividad.GetAll().Where(x=>x.IdDepartamento == _id&& x.Estado ==1);
-            if(actividades != null)
-            {
-                foreach (var item in actividades)
-                {
-                    await _actividadService.Delete(item.Id);
-                }
-            }
+            //var actividades = _reposActividad.GetAll().Where(x=>x.IdDepartamento == _id&& x.Estado ==1);
+            //if(actividades != null)
+            //{
+            //    foreach (var item in actividades)
+            //    {
+            //        await _actividadService.Delete(item.Id);
+            //    }
+            //}
 
             var _response = await _client.DeleteAsync($"api/Departamentos/{_id}");
             

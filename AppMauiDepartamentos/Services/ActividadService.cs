@@ -29,7 +29,7 @@ namespace AppMauiDepartamentos.Services
         LoginService _loginService;
         //public event Action? AlActualizar;
         public event EventHandler? AlActualizar;
-        public event EventHandler<List<ActividadDTO>>? AlActualizarImagenes;
+        public event EventHandler<List<ImagenConId>>? AlActualizarImagenes;
 
         public ActividadService(LoginService ls , Repository<Actividad> ar)
         {
@@ -47,7 +47,7 @@ namespace AppMauiDepartamentos.Services
             //App._loginService.OnLogin += _loginService_OnLogin1;
             LimpiarActividades();
         }
-        public List<ActividadDTO> listaImagen = new();
+        public List<ImagenConId> listaImagen = new();
      
         public async Task LimpiarActividades()
         {
@@ -65,7 +65,7 @@ namespace AppMauiDepartamentos.Services
             {
             }
         }
-        public async Task GetActividades( )
+        public async Task GetActividades(bool? nuevaImagen )
         {
             try
             {
@@ -106,13 +106,8 @@ namespace AppMauiDepartamentos.Services
                         
                         var item = _response[i];
                         var _entity = _repos.Get(item.Id);
-                        //if (item.Id == null || item.Id == 0 || item.IdDepartamento == null || item.IdDepartamento == 0)
-                        //{
-                        //    int x = 4;
-                        //}
-                        //if (r.Id == item.Id)
-                        //{ int t = 2; }
-                        if (_entity == null && item.Estado != 2)
+                        
+                        if (_entity == null && item.Estado == 1)
                         {
                             
                             _entity = new()
@@ -162,27 +157,43 @@ namespace AppMauiDepartamentos.Services
                             }
                         }
                     }
-                    if (_aviso)
+                    if (_aviso || nuevaImagen == true)
                     {
+                        listaImagen.Clear();
                         //foreach (var item in _response)
                         //{
-                        //    listaImagen.Add(item);
+                        //    ImagenConId s = new()
+                        //    {
+                        //        Id = item.Id,
+                        //        ImagenBase64 = item.Imagen ?? ""
+                        //    };
+                        //    listaImagen.Add(s);
                         //}
+                        for (int i = 0; i < numero; i++)
+                        {
+                            ImagenConId s = new()
+                            {
+                                Id = _response[i].Id,
+                                ImagenBase64 = _response[i].Imagen ?? ""
+                            };
+                            listaImagen.Add(s);
+                        }
+                        
                         //Application.Current.Dispatcher.Dispatch(() =>
                         //{
-                        //    AlActualizar?.Invoke(this,EventArgs.Empty);
+                        //    AlActualizar?.Invoke(this, EventArgs.Empty);
+
+                        //});
+                        //_ = MainThread.InvokeOnMainThreadAsync(() =>
+                        //{
+                        //    AlActualizar?.Invoke(this, EventArgs.Empty);
 
                         //});
                         _ = MainThread.InvokeOnMainThreadAsync(() =>
                         {
-                            AlActualizar?.Invoke(this, EventArgs.Empty);
+                            AlActualizarImagenes?.Invoke(this, listaImagen);
 
                         });
-                        //_ = MainThread.InvokeOnMainThreadAsync(() =>
-                        //{
-                        //    AlActualizarImagenes?.Invoke(this, listaImagen);
-
-                        //});
                         //AlActualizar?.Invoke(this, null);
 
 
@@ -216,7 +227,7 @@ namespace AppMauiDepartamentos.Services
             if (_response.IsSuccessStatusCode) 
             {
                 //await GetActividades(iddep);
-                await GetActividades();
+                await GetActividades(false);
 
             }
             else
@@ -234,7 +245,7 @@ namespace AppMauiDepartamentos.Services
             if (_response.IsSuccessStatusCode)
             {
                 //await GetActividades(iddep);
-                await GetActividades();
+                await GetActividades(false);
 
             }
         }
@@ -249,7 +260,7 @@ namespace AppMauiDepartamentos.Services
                 if (_response.IsSuccessStatusCode)
                 {
                     //await GetActividades(iddep);
-                    await GetActividades();
+                    await GetActividades(true);
 
                 }
             }
@@ -277,6 +288,25 @@ namespace AppMauiDepartamentos.Services
             }
             
 
+        }
+        public async Task<IEnumerable<ActividadDTO>?> GetBorradores(int id)
+        {
+            try
+            {
+                var token = await _loginService.GetToken();
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var _response = await _client.GetFromJsonAsync<IEnumerable<ActividadDTO>>("api/actividades/departamento/borradores");
+                if(_response != null)
+                {
+                    return _response;
+                }
+                return null;
+            }
+            catch (Exception a)
+            {
+
+                return null;
+            }
         }
     }
 }

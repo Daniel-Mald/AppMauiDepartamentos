@@ -9,7 +9,7 @@ namespace AppMauiDepartamentos.Models.Entities
 {
     public class ActividadConImagen
     {
-        public ActividadDTO Actividad { get; set; } = null!;
-        public ImageSource? Imagen { get; set; }
+        public Actividad Actividad { get; set; } = null!;
+        public byte[]? Imagen { get; set; }
     }
 }

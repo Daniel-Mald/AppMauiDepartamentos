@@ -2,9 +2,9 @@ using AppMauiDepartamentos.ViewModels;
 
 namespace AppMauiDepartamentos.Views;
 
-public partial class DeleteView : ContentPage
+public partial class MisBorradoresView : ContentPage
 {
-	public DeleteView(ActividadesViewModel vm)
+	public MisBorradoresView(ActividadesViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

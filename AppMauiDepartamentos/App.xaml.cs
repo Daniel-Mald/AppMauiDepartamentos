@@ -41,7 +41,7 @@ namespace AppMauiDepartamentos
             
             while (!token.IsCancellationRequested)
             {
-                await _service.GetActividades();
+                await _service.GetActividades(false);
                 Thread.Sleep(TimeSpan.FromSeconds(20));
 
             }

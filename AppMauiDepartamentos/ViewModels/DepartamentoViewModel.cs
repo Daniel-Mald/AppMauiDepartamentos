@@ -157,8 +157,15 @@ namespace AppMauiDepartamentos.ViewModels
                 DepartamentoTemporal = n;
                 if(n.SuperiorId != n.SuperiorId || n.SuperiorId != 0 || n.SuperiorId != null)
                 {
-                    
-                    DepartamentoTemporal2= _repos.Get((int)n.SuperiorId);
+                    if(n.SuperiorId == null) 
+                    {
+                        DepartamentoTemporal2 = new();
+                    }
+                    else
+                    {
+                        DepartamentoTemporal2 = _repos.Get((int)n.SuperiorId);
+                        
+                    }
                 }
                 //Departamento.IdSuperior =n.SuperiorId;
                 //Departamento.Nombre = n.Nombre;
