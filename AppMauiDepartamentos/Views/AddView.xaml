@@ -6,7 +6,7 @@
              xmlns:helpers="clr-namespace:AppMauiDepartamentos.Helpers"
              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
-             Title="AddView">
+             Title="Agregar actividad">
     <!--<ContentPage.BindingContext>
         <vm:ActividadesViewModel></vm:ActividadesViewModel>
     </ContentPage.BindingContext>-->
@@ -26,7 +26,7 @@
 
         </Style>
     </ContentPage.Resources>
-    <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+    <Frame CornerRadius="20" Margin="20" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" MinimumHeightRequest="600" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
         <VerticalStackLayout>
             <Label Style="{StaticResource LabelStyle}" Text="Titulo"/>
             <Entry  Text="{Binding Actividad.Titulo}"/>
@@ -39,9 +39,9 @@
                 <Image x:Name="SelectedImage"  WidthRequest="80" HeightRequest="80"/>
                 <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
             </VerticalStackLayout>
-            <Button Style="{StaticResource ButtonStyle}" Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=False}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.Newspaper}"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelarCommand}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=True}" Text="Guardar como borrador"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=False}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.Newspaper}"  HeightRequest="50"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelarCommand}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}" HeightRequest="50"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=True}" Text="Guardar como borrador"  HeightRequest="50"></Button>
 
 
         </VerticalStackLayout>

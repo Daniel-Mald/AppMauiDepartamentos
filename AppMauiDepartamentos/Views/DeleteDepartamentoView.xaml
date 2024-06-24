@@ -4,7 +4,7 @@
              x:Class="AppMauiDepartamentos.Views.DeleteDepartamentoView"
               xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
-             Title="DeleteDepartamentoView">
+             Title="Eliminar departamento">
     <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
     </ContentPage.BindingContext>-->
@@ -24,13 +24,13 @@
 
         </Style>
     </ContentPage.Resources>
-    <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+    <Frame CornerRadius="20" Margin="20" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
     <VerticalStackLayout>
             <Label Style="{StaticResource LabelStyle}" Text="Seguro que deseas eliminar "></Label>
             <Label Style="{StaticResource LabelStyle}" Text="{Binding Seleccionado.Nombre}"></Label>
         <Grid ColumnDefinitions="*,*">
-            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.TrashCan}" Command="{Binding EliminarCommand}"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}" Command="{Binding CancelarCommand}"></Button>
+                <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.TrashCan}" Command="{Binding EliminarCommand}" HeightRequest="90"></Button>
+                <Button Style="{StaticResource ButtonStyle}" Grid.Column="0" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}" Command="{Binding CancelarCommand}" HeightRequest="90"></Button>
         </Grid>
     </VerticalStackLayout>
         

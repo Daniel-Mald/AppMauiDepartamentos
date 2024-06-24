@@ -4,7 +4,7 @@
              x:Class="AppMauiDepartamentos.Views.UpdateDepartamentoView"
               xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
-             Title="UpdateDepartamentoView">
+             Title="Actualizar departamento">
     <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
     </ContentPage.BindingContext>-->
@@ -23,7 +23,7 @@
             <Setter Property="Margin" Value="10"></Setter>
         </Style>
     </ContentPage.Resources>
-    <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+    <Frame CornerRadius="20" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
         <VerticalStackLayout>
             <Label Text="Departamento"/>
             <Entry Text="{Binding DepartamentoTemporal.Nombre}" />
@@ -36,8 +36,8 @@
             <Picker ItemsSource="{Binding Departamentos}" SelectedItem="{Binding DepartamentoTemporal2}" ItemDisplayBinding="{Binding Nombre}">
 
             </Picker>
-            <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" CommandParameter="{Binding Departamento.Id}" FontSize="20"  Text="{x:Static i:MalditosIconos.PenToSquare}" FontFamily="iconoss"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelarCommand}"  FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" CommandParameter="{Binding Departamento.Id}" FontSize="20"  Text="{x:Static i:MalditosIconos.PenToSquare}" FontFamily="iconoss" HeightRequest="70"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelarCommand}"  FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}" HeightRequest="70"></Button>
 
         </VerticalStackLayout>
     </Frame>

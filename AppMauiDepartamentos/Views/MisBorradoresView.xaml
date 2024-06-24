@@ -4,7 +4,7 @@
              x:Class="AppMauiDepartamentos.Views.MisBorradoresView"
              xmlns:toimage="clr-namespace:AppMauiDepartamentos.Resources"
              xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
-             Title="MisBorradoresView">
+             Title="Mis Borradores">
     <ContentPage.Resources>
         <toimage:Base64ToImageConverter x:Key="ToImage"></toimage:Base64ToImageConverter>
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -33,7 +33,7 @@
                 <CollectionView  ItemsSource="{Binding Borradores}"  x:Name="Listas">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame CornerRadius="60" Margin="30" BackgroundColor="{StaticResource Gray900}" WidthRequest="300">
+                            <Frame CornerRadius="20" Margin="10" BackgroundColor="{StaticResource Gray900}" WidthRequest="300">
                                 <Grid ColumnDefinitions="*,*" RowDefinitions=".30*,.40*,.20*" HeightRequest="300" Margin="10">
                                     <StackLayout>
                                         <Label  Text="{Binding Actividad.Titulo}" FontAttributes="Bold" />

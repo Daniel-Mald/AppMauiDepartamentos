@@ -4,7 +4,7 @@
                           xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
 
              x:Class="AppMauiDepartamentos.Views.UpdateView"
-             Title="UpdateView">
+             Title="Editar actividad">
     <ContentPage.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
@@ -23,7 +23,7 @@
     </ContentPage.Resources>
     <Grid>
 
-        <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+        <Frame CornerRadius="20" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
             <VerticalStackLayout>
                 <Label Text="Titulo"/>
                 <Entry Text="{Binding Seleccionado.Titulo}"/>
@@ -36,8 +36,8 @@
                     <Image x:Name="SelectedImage"  WidthRequest="120" HeightRequest="120"/>
                     <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
                 </VerticalStackLayout>
-                <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.PenToSquare}" CommandParameter="{i:BoolExtension Value=False}"></Button>
-                <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" Text="Publicar"  IsVisible="{Binding EsBorrador}" CommandParameter="{i:BoolExtension Value=True}"></Button>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.PenToSquare}" CommandParameter="{i:BoolExtension Value=False}" HeightRequest="60"></Button>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" FontSize="20" Text="Publicar"  IsVisible="{Binding EsBorrador}" CommandParameter="{i:BoolExtension Value=True}" HeightRequest="60"></Button>
 
                 <Button Command="{Binding CancelarCommand}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}"></Button>
             </VerticalStackLayout>

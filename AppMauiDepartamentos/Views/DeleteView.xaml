@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMauiDepartamentos.Views.DeleteView"
              xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
-             Title="DeleteView">
+             Title="Eliminar actividad">
     <ContentPage.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
@@ -20,18 +20,18 @@
 
         </Style>
     </ContentPage.Resources>
-    <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+    <Frame CornerRadius="20" Margin="20" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
         
-    <VerticalStackLayout>
+    <VerticalStackLayout >
             <Label Style="{StaticResource LabelStyle}" Text="Seguro que deseas eliminar "></Label>
             <Label Style="{StaticResource LabelStyle}" Text="{Binding Seleccionado.Titulo}"></Label>
         <Grid ColumnDefinitions="*,*">
             <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Command="{Binding EliminarCommand}"
                     
-                    FontSize="20"  Text="{x:Static i:MalditosIconos.TrashCan}" FontFamily="iconoss"
+                    FontSize="20"  HeightRequest="50" Text="{x:Static i:MalditosIconos.TrashCan}" FontFamily="iconoss"
                     ></Button>
             <Button Style="{StaticResource ButtonStyle}" Grid.Column="0"  Command="{Binding CancelarCommand}"
-                    FontSize="20"  Text="{x:Static i:MalditosIconos.CircleLeft}" FontFamily="iconoss"></Button>
+                    FontSize="20"  HeightRequest="50" Text="{x:Static i:MalditosIconos.CircleLeft}" FontFamily="iconoss"></Button>
         </Grid>
     </VerticalStackLayout>
     </Frame>

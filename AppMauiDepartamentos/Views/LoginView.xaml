@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMauiDepartamentos.Views.LoginView"
              xmlns:vm ="clr-namespace:AppMauiDepartamentos.ViewModels"
-             Title="LoginView">
+             Title="Iniciar sesión">
     <ContentPage.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
@@ -22,7 +22,7 @@
     </ContentPage.BindingContext>-->
     <Grid>
         
-        <Frame CornerRadius="60" Margin="30" BackgroundColor="{StaticResource Gray900}" WidthRequest="300" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+        <Frame CornerRadius="20" Margin="20" BackgroundColor="{StaticResource Gray900}" WidthRequest="300" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
             <VerticalStackLayout Margin="30"  >
                 <Label HorizontalTextAlignment="Center" Style="{StaticResource LabelStyle}" Margin="10"
         Text="Username"/>

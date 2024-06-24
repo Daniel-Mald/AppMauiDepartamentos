@@ -4,7 +4,7 @@
              x:Class="AppMauiDepartamentos.Views.AddDepartamentoView"
               xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
-             Title="AddDepartamentoView">
+             Title="Agregar departamento">
     <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
     </ContentPage.BindingContext>-->
@@ -24,7 +24,7 @@
 
         </Style>
     </ContentPage.Resources>
-    <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+    <Frame CornerRadius="20" Margin="20" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
         <VerticalStackLayout>
             <Label Style="{StaticResource LabelStyle}" Text="Nombre"/>
             <Entry Text="{Binding Departamento.Nombre}"/>
@@ -46,9 +46,9 @@
     </ListView>-->
 
             <Button Style="{StaticResource ButtonStyle}" Command="{Binding AgregarCommand}" 
-            FontSize="20"  Text="{x:Static i:MalditosIconos.SquarePlus}" FontFamily="iconoss"></Button>
+            FontSize="20"  Text="{x:Static i:MalditosIconos.SquarePlus}" FontFamily="iconoss" HeightRequest="90"></Button>
             <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelarCommand}" 
-            FontSize="20"  Text="{x:Static i:MalditosIconos.CircleLeft}" FontFamily="iconoss"></Button>
+            FontSize="20"  Text="{x:Static i:MalditosIconos.CircleLeft}" FontFamily="iconoss" HeightRequest="90"></Button>
 
 
         </VerticalStackLayout>
