@@ -22,7 +22,7 @@
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="TextColor" Value="White" />
             <Setter Property="FontSize" Value="Medium" />
-            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
 
         </Style>
     </ContentPage.Resources>
@@ -36,7 +36,7 @@
             <DatePicker Date="{Binding Actividad.FechaRealizacion}"/>
             <VerticalStackLayout>
                 <Button Text="Seleccionar Imagen" Clicked="Button_Clicked"/>
-                <Image x:Name="SelectedImage"  WidthRequest="200" HeightRequest="200"/>
+                <Image x:Name="SelectedImage"  WidthRequest="80" HeightRequest="80"/>
                 <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
             </VerticalStackLayout>
             <Button Style="{StaticResource ButtonStyle}" Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=False}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.Newspaper}"></Button>
