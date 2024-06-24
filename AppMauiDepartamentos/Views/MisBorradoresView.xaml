@@ -3,36 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMauiDepartamentos.Views.MisBorradoresView"
              xmlns:toimage="clr-namespace:AppMauiDepartamentos.Resources"
+             xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
              Title="MisBorradoresView">
     <ContentPage.Resources>
         <toimage:Base64ToImageConverter x:Key="ToImage"></toimage:Base64ToImageConverter>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="Medium" />
+        </Style>
     </ContentPage.Resources>
-    <Grid ColumnDefinitions=".25*,.25*,.25*,.25*" RowDefinitions=".10* , .90*" >
-        
+    <Grid ColumnDefinitions="100*" RowDefinitions=".90* , .10*" >
 
-        
-       
 
-        
-        <Button Grid.Row="0" Grid.Column="4" Command="{Binding CancelarCommand}" Text="Volver"></Button>
-        <ScrollView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+
+
+
+
+        <Button Grid.Row="1"  Command="{Binding CancelarCommand}" Style="{StaticResource ButtonStyle}"
+                FontSize="30"  Text="{x:Static i:MalditosIconos.CircleLeft}" FontFamily="iconoss"></Button>
+        <ScrollView Grid.Row="0" Grid.Column="0" >
             <Grid>
                 <CollectionView  ItemsSource="{Binding Borradores}"  x:Name="Listas">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
+                            <Frame CornerRadius="60" Margin="30" BackgroundColor="{StaticResource Gray900}" WidthRequest="300">
+                                <Grid ColumnDefinitions="*,*" RowDefinitions=".30*,.40*,.20*" HeightRequest="300" Margin="10">
+                                    <StackLayout>
+                                        <Label  Text="{Binding Actividad.Titulo}" FontAttributes="Bold" />
+                                        <Label  Text="{Binding Actividad.FechaRealizacion ,StringFormat='Fecha: {0:dd/MM/yyyy}'}" />
+                                        <Label Text="{Binding Actividad.Descripcion}" />
+                                    </StackLayout>
+                                    <Grid Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2" Padding="5">
+                                        <Image Aspect="AspectFit" Source="{Binding Imagen, Converter={StaticResource ToImage}}" >
+                                        </Image>
+                                    </Grid>
 
-                            <Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="*,*">
+                                    <Button Style="{StaticResource ButtonStyle}" Margin="3" Grid.Column="0" Grid.Row="2" FontSize="30" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.PenToSquare}" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEditarCommand}" CommandParameter="{Binding Actividad.Id}"/>
+                                    <Button Style="{StaticResource ButtonStyle}" Margin="3" Grid.Column="1" Grid.Row="2" FontSize="30" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.TrashCan}" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Actividad.Id}"/>
 
-                                <Label Grid.Column="1" Text="{Binding Actividad.Titulo}" FontAttributes="Bold" />
-                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Actividad.FechaRealizacion ,StringFormat='Fecha: {0:dd/MM/yyyy}'}" />
-                                <Label Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="{Binding Actividad.Descripcion}" />
-                                <Button Margin="3" Grid.Column="3" Grid.Row="0" Text="Editar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEditarCommand}" CommandParameter="{Binding Actividad.Id}"/>
-                                <Button Margin="3" Grid.Column="3" Grid.Row="1" Text="Eliminar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Actividad.Id}"/>
-                                <Image Grid.Column="4"   Grid.Row="1" Grid.RowSpan="2" HeightRequest="100" WidthRequest="100" Source="{Binding Imagen, Converter={StaticResource ToImage}}" Background="red">
+                                    
 
-                                </Image>
-
-                            </Grid>
+                                </Grid>
+                            </Frame>
+                            
                             <!--</ViewCell.View>
 
                         </ViewCell>-->

@@ -62,6 +62,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\defaultImage.png" />
+	  <None Remove="Resources\Fonts\Font Awesome 6 Free-Regular-400.otf" />
 	  <None Remove="Resources\Fonts\fontello.ttf" />
 	</ItemGroup>
 

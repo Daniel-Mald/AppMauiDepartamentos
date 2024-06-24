@@ -4,6 +4,7 @@
              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
              xmlns:root="clr-namespace:AppMauiDepartamentos"
              xmlns:rr="clr-namespace:AppMauiDepartamentos.Resources"
+             xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
              x:Class="AppMauiDepartamentos.Views.PrincipalView"
              Title="Actividades ITESRC" BackgroundColor="{StaticResource Gray900}">
     <!--<ContentPage.Resources>
@@ -62,28 +63,54 @@
             <Setter Property="FontSize" Value="Medium" />
         </Style>
     </ContentPage.Resources>
-    <Grid ColumnDefinitions=".25*,.25*,.25*,.25*, .20*" RowDefinitions=".10* , .90*" >
-        <Button x:Name="Departamentos" Grid.Row="0" Grid.Column="1" Command="{Binding GoToDepartamentosCommand}" Text="Ver Departamentos"
+    <Grid ColumnDefinitions=".20*,.20*,.20*,.20*" RowDefinitions=".90* , .10*" >
+        <Button x:Name="Departamentos" Grid.Row="1" Grid.Column="0" Command="{Binding GoToDepartamentosCommand}" FontSize="30" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.Building}"
                 IsEnabled="{Binding Esadmin}"
                 IsVisible="{Binding Esadmin}"
                 Style="{StaticResource ButtonStyle}">
         </Button>
-        <Button Grid.Row="0" Grid.Column="2" Command="{Binding VerAgregarCommand}" Text="Nueva actividad" Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Row="0" Grid.Column="3" Command="{Binding LogoutCommand}" Text="Logout" Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Row="0" Grid.Column="4" Command="{Binding VerBorradoresCommand}" Text="Ver mis borradores" Style="{StaticResource ButtonStyle}"/>
-        <ScrollView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+        <Button Grid.Row="1" Grid.Column="1" Command="{Binding VerAgregarCommand}" 
+              FontFamily="iconoss" FontSize="30"
+                Text="{x:Static i:MalditosIconos.CalendarPlus}" Style="{StaticResource ButtonStyle}">
+            
+        </Button>
+        <Button Grid.Row="1" Grid.Column="2" Command="{Binding LogoutCommand}"  Style="{StaticResource ButtonStyle}"
+                FontFamily="iconoss" FontSize="30"  Text="{x:Static i:MalditosIconos.CircleRight}">
+            
+           
+        </Button>
+        <Button Grid.Row="1" Grid.Column="3" Command="{Binding VerBorradoresCommand}" 
+                FontFamily="iconoss" FontSize="30"
+  Text="{x:Static i:MalditosIconos.FolderOpen}"
+                Style="{StaticResource ButtonStyle}"/>
+        <ScrollView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="10 , 20">
             <Grid Padding="10">
                 <CollectionView ItemsSource="{Binding ActividadesImg}" x:Name="Listas">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="Auto,Auto,Auto">
-                                <Label Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Actividad.Titulo}" FontAttributes="Bold" Style="{StaticResource LabelStyle}" />
-                                <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Text="{Binding Actividad.FechaRealizacion, StringFormat='Fecha: {0:dd/MM/yyyy}'}" Style="{StaticResource LabelStyle}" />
-                                <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Text="{Binding Actividad.Descripcion}" Style="{StaticResource LabelStyle}" />
-                                <Button Margin="3" Grid.Column="3" Grid.Row="0" Text="Editar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEditarCommand}" CommandParameter="{Binding Actividad.Id}" Style="{StaticResource ButtonStyle}" />
-                                <Button Margin="3" Grid.Column="3" Grid.Row="1" Text="Eliminar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Actividad.Id}" Style="{StaticResource ButtonStyle}" />
-                                <Image Grid.Column="4" Grid.Row="0" Grid.RowSpan="3" HeightRequest="100" WidthRequest="100" Source="{Binding Imagen, Converter={StaticResource ToImage}}" Aspect="AspectFill" />
-                            </Grid>
+                            <Frame CornerRadius="60" Margin="30" BackgroundColor="{StaticResource Gray900}" BorderColor="{StaticResource Gray500}">
+                                <Grid ColumnDefinitions="*,*" RowDefinitions=".30*,.40*,.20*" HeightRequest="300" Margin="10" >
+                                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="Transparent"  VerticalOptions="Center">
+                                        <Label  Text="{Binding Actividad.Titulo}" FontAttributes="Bold" FontSize="20" Style="{StaticResource LabelStyle}" />
+
+
+                                        <Label  Text="{Binding Actividad.Descripcion}" Style="{StaticResource LabelStyle}" FontSize="17"/>
+                                        <Label  Text="{Binding Actividad.FechaRealizacion, StringFormat='Fecha: {0:dd/MM/yyyy}'}"  Style="{StaticResource LabelStyle}"  FontSize="12" />
+                                    </StackLayout>
+                                    <Grid Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2" Padding="5">
+                                        <Image   Source="{Binding Imagen, Converter={StaticResource ToImage}}" Aspect="AspectFit" />
+
+                                    </Grid>
+
+                                    <Button IsVisible="{Binding MePertenece}" Margin="3" Grid.Column="0" Grid.Row="2" 
+                                            FontSize="30"  Text="{x:Static i:MalditosIconos.PenToSquare}" FontFamily="iconoss"
+                                            Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEditarCommand}" CommandParameter="{Binding Actividad.Id}" Style="{StaticResource ButtonStyle}" />
+                                    <Button IsVisible="{Binding MePertenece}" Margin="3" Grid.Column="1" Grid.Row="2"
+                                            FontSize="30"  Text="{x:Static i:MalditosIconos.CalendarXmark}" FontFamily="iconoss"
+                                            Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Actividad.Id}" Style="{StaticResource ButtonStyle}" />
+                                </Grid>
+                            </Frame>
+                            
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

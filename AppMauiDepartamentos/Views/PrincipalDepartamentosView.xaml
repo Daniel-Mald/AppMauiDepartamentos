@@ -3,27 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMauiDepartamentos.Views.PrincipalDepartamentosView"
              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
+             xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
              Title="PrincipalDepartamentosView">
     <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
     </ContentPage.BindingContext>-->
-    <Grid ColumnDefinitions=".3*, .3*,.3*" RowDefinitions=".10* , .90*">
-        <Button Grid.Row="0" Grid.Column="1" Command="{Binding VerAgregarDCommand}" Text="Nuevo departamento"></Button>
-        <Button Grid.Row="0" Grid.Column="2" Command="{Binding GoBackCommand}" Text="Atras"></Button>
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="Medium" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid ColumnDefinitions=".3*, .3*,.3*" RowDefinitions=".90* , .10*" >
+        <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="1" Command="{Binding VerAgregarDCommand}"  FontSize="30"  Text="{x:Static i:MalditosIconos.SquarePlus}" FontFamily="iconoss"></Button>
+        <Button Style="{StaticResource ButtonStyle}" Grid.Row="1" Grid.Column="2" Command="{Binding GoBackCommand}" FontSize="30"  Text="{x:Static i:MalditosIconos.CircleLeft}" FontFamily="iconoss"></Button>
 
-        <ScrollView Grid.Row="1"  Grid.ColumnSpan="4">
+        <ScrollView Grid.Row="0"  Grid.ColumnSpan="4">
             <Grid >
-                <CollectionView  ItemsSource="{Binding Departamentos}"  x:Name="Listas">
+                <CollectionView  ItemsSource="{Binding Departamentos}"  x:Name="Listas" BackgroundColor="Transparent">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame>
-                                <Grid ColumnDefinitions=".25*,*,*,*" RowDefinitions="*,*" >
+                            <Frame CornerRadius="60" Margin="30" BackgroundColor="{StaticResource Gray900}" BorderColor="{StaticResource Gray500}">
+                                <Grid ColumnDefinitions="*,*" RowDefinitions=".50*,.30*" HeightRequest="150" Margin="10">
+                                    <StackLayout Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5">
+                                        <Label Text="{Binding Nombre}" FontAttributes="Bold" />
+                                        <Label   Text="{Binding UserName}" />
+                                        <Label Text="{Binding Superior.Nombre}" />
+                                    </StackLayout>
 
-                                    <Label Grid.Column="1" Text="{Binding Nombre}" FontAttributes="Bold" />
-                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding UserName}" />
-                                    <Label Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="{Binding Superior.Nombre}" />
-                                    <Button Margin="5" Grid.Column="3" Grid.Row="0" Text="Editar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEditarCommand}" CommandParameter="{Binding Id}"/>
-                                    <Button Margin="5" Grid.Column="3" Grid.Row="1" Text="Eliminar" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Id}"/>
+                                    
+                                    <Button Style="{StaticResource ButtonStyle}" Margin="5" Grid.Column="0" Grid.Row="1" FontSize="30" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.PenToSquare}" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEditarCommand}" CommandParameter="{Binding Id}"/>
+                                    <Button Style="{StaticResource ButtonStyle}" Margin="5" Grid.Column="1" Grid.Row="1" FontSize="30" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.TrashCan}" Command="{Binding Source={x:Reference Listas},Path=BindingContext.VerEliminarCommand}" CommandParameter="{Binding Id}"/>
 
                                 </Grid>
                             </Frame>

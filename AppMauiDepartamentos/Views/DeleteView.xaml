@@ -2,13 +2,37 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMauiDepartamentos.Views.DeleteView"
+             xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
              Title="DeleteView">
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="5,5"  />
+            <Setter Property="HeightRequest" Value="10"></Setter>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="Margin" Value="10"></Setter>
+
+        </Style>
+    </ContentPage.Resources>
+    <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+        
     <VerticalStackLayout>
-        <Label Text="Seguro que deseas eliminar "></Label>
-        <Label Text="{Binding Seleccionado.Titulo}"></Label>
+            <Label Style="{StaticResource LabelStyle}" Text="Seguro que deseas eliminar "></Label>
+            <Label Style="{StaticResource LabelStyle}" Text="{Binding Seleccionado.Titulo}"></Label>
         <Grid ColumnDefinitions="*,*">
-            <Button Grid.Column="1" Text="Eliminar" Command="{Binding EliminarCommand}"></Button>
-            <Button Grid.Column="0" Text="Cancelar" Command="{Binding CancelarCommand}"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Command="{Binding EliminarCommand}"
+                    
+                    FontSize="20"  Text="{x:Static i:MalditosIconos.TrashCan}" FontFamily="iconoss"
+                    ></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="0"  Command="{Binding CancelarCommand}"
+                    FontSize="20"  Text="{x:Static i:MalditosIconos.CircleLeft}" FontFamily="iconoss"></Button>
         </Grid>
     </VerticalStackLayout>
+    </Frame>
 </ContentPage>

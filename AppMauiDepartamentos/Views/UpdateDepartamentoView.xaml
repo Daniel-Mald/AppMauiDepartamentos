@@ -3,23 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMauiDepartamentos.Views.UpdateDepartamentoView"
               xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
+             xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
              Title="UpdateDepartamentoView">
     <!--<ContentPage.BindingContext>
         <vm:DepartamentoViewModel></vm:DepartamentoViewModel>
     </ContentPage.BindingContext>-->
-    <VerticalStackLayout>
-        <Label Text="Departamento"/>
-        <Entry Text="{Binding DepartamentoTemporal.Nombre}"/>
-        <Label Text="Username"/>
-        <Entry Text="{Binding DepartamentoTemporal.UserName}"/>
-        
-        
-        
-        <Picker ItemsSource="{Binding Departamentos}" SelectedItem="{Binding DepartamentoTemporal2}" ItemDisplayBinding="{Binding Nombre}">
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="5,5"  />
+            <Setter Property="HeightRequest" Value="10"></Setter>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="Margin" Value="10"></Setter>
+        </Style>
+    </ContentPage.Resources>
+    <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+        <VerticalStackLayout>
+            <Label Text="Departamento"/>
+            <Entry Text="{Binding DepartamentoTemporal.Nombre}" />
+            <Label Text="Username"/>
+            <Entry Text="{Binding DepartamentoTemporal.UserName}"/>
 
-        </Picker>
-        <Button Command="{Binding EditarCommand}" CommandParameter="{Binding Departamento.Id}" Text="Guardar"></Button>
-        <Button Command="{Binding CancelarCommand}"  Text="Cancelar"></Button>
 
-    </VerticalStackLayout>
+            <Label Text="Departamento superior actual:"></Label>
+            <Label Text="{Binding DepartamentoSuperior}" FontSize="20"></Label>
+            <Picker ItemsSource="{Binding Departamentos}" SelectedItem="{Binding DepartamentoTemporal2}" ItemDisplayBinding="{Binding Nombre}">
+
+            </Picker>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" CommandParameter="{Binding Departamento.Id}" FontSize="20"  Text="{x:Static i:MalditosIconos.PenToSquare}" FontFamily="iconoss"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelarCommand}"  FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}"></Button>
+
+        </VerticalStackLayout>
+    </Frame>
+    
 </ContentPage>

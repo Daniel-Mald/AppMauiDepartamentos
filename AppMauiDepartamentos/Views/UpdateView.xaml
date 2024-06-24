@@ -1,25 +1,64 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                          xmlns:helpers="clr-namespace:AppMauiDepartamentos.Helpers"
+                          xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
 
              x:Class="AppMauiDepartamentos.Views.UpdateView"
              Title="UpdateView">
-    <VerticalStackLayout>
-        <Label Text="Titulo"/>
-        <Entry Text="{Binding Seleccionado.Titulo}"/>
-        <Label Text="Descripcion"/>
-        <Entry Text="{Binding Seleccionado.Descripcion}"/>
-        <Label Text="Fecha a realizar"/>
-        <DatePicker Date="{Binding Seleccionado.FechaRealizacion}"/>
-        <VerticalStackLayout>
-            <Button Text="Seleccionar Imagen" Clicked="Button_Clicked"/>
-            <Image x:Name="SelectedImage"  WidthRequest="200" HeightRequest="200"/>
-            <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
-        </VerticalStackLayout>
-        <Button Command="{Binding EditarCommand}" Text="Guardar cambios" CommandParameter="{helpers:BoolExtension Value=False}"></Button>
-        <Button Command="{Binding EditarCommand}" Text="Publicar" IsVisible="{Binding EsBorrador}" CommandParameter="{helpers:BoolExtension Value=True}"></Button>
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="5,5"  />
+            <Setter Property="HeightRequest" Value="10"></Setter>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="Margin" Value="10"></Setter>
 
-        <Button Command="{Binding CancelarCommand}" Text="Cancelar"></Button>
-    </VerticalStackLayout>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+
+        <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout>
+                <Label Text="Titulo"/>
+                <Entry Text="{Binding Seleccionado.Titulo}"/>
+                <Label Text="Descripcion"/>
+                <Entry Text="{Binding Seleccionado.Descripcion}"/>
+                <Label Text="Fecha a realizar"/>
+                <DatePicker Date="{Binding Seleccionado.FechaRealizacion}"/>
+                <VerticalStackLayout>
+                    <Button Text="Seleccionar Imagen" Clicked="Button_Clicked"/>
+                    <Image x:Name="SelectedImage"  WidthRequest="120" HeightRequest="120"/>
+                    <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
+                </VerticalStackLayout>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.PenToSquare}" CommandParameter="{i:BoolExtension Value=False}"></Button>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding EditarCommand}" Text="Publicar"  IsVisible="{Binding EsBorrador}" CommandParameter="{i:BoolExtension Value=True}"></Button>
+
+                <Button Command="{Binding CancelarCommand}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}"></Button>
+            </VerticalStackLayout>
+        </Frame>
+        
+        <!--<Label Background="{StaticResource Gray900}" Text="No puedes editar esta actividad ya que no la creaste tu" IsVisible="{Binding MiActividad}"></Label>-->
+    </Grid>
+    <!--<Grid>
+
+        <Frame CornerRadius="60" Margin="30" BackgroundColor="{StaticResource Gray900}" WidthRequest="300" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout Margin="30"  >
+                <Label HorizontalTextAlignment="Center" Style="{StaticResource LabelStyle}" Margin="10"
+        Text="Username"/>
+                <Entry Text="{Binding Dto.Username}" ></Entry>
+                <Label HorizontalTextAlignment="Center" Style="{StaticResource LabelStyle}" Margin="10"
+Text="Password"/>
+                <Entry Text="{Binding Dto.Password}" IsPassword="True"></Entry>
+                <Button Text="Login" Command="{Binding LoginCommand}" Style="{StaticResource ButtonStyle}" Margin="0, 20"></Button>
+                <Label Text="{Binding Error}"  TextColor="Red" FontSize="20"></Label>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>-->
+
 </ContentPage>

@@ -11,5 +11,6 @@ namespace AppMauiDepartamentos.Models.Entities
     {
         public Actividad Actividad { get; set; } = null!;
         public byte[]? Imagen { get; set; }
+        public bool MePertenece { get; set; }
     }
 }

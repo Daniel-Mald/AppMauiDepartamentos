@@ -4,17 +4,36 @@
              x:Class="AppMauiDepartamentos.Views.LoginView"
              xmlns:vm ="clr-namespace:AppMauiDepartamentos.ViewModels"
              Title="LoginView">
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="Medium" />
+        </Style>
+    </ContentPage.Resources>
     <!--<ContentPage.BindingContext>
         <vm:LoginViewModel></vm:LoginViewModel>
     </ContentPage.BindingContext>-->
-    <VerticalStackLayout>
-        <Label 
-           Text="Username"/>
-        <Entry Text="{Binding Dto.Username}" ></Entry>
-        <Label 
-   Text="Password"/>
-        <Entry Text="{Binding Dto.Password}" IsPassword="True"></Entry>
-        <Button Text="Login" Command="{Binding LoginCommand}"></Button>
-        <Label Text="{Binding Error}"  TextColor="Red" FontSize="20"></Label>
-    </VerticalStackLayout>
+    <Grid>
+        
+        <Frame CornerRadius="60" Margin="30" BackgroundColor="{StaticResource Gray900}" WidthRequest="300" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout Margin="30"  >
+                <Label HorizontalTextAlignment="Center" Style="{StaticResource LabelStyle}" Margin="10"
+        Text="Username"/>
+                <Entry Text="{Binding Dto.Username}" ></Entry>
+                <Label HorizontalTextAlignment="Center" Style="{StaticResource LabelStyle}" Margin="10"
+Text="Password"/>
+                <Entry Text="{Binding Dto.Password}" IsPassword="True"></Entry>
+                <Button Text="Login" Command="{Binding LoginCommand}" Style="{StaticResource ButtonStyle}" Margin="0, 20"></Button>
+                <Label Text="{Binding Error}"  TextColor="Red" FontSize="20"></Label>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+    
 </ContentPage>

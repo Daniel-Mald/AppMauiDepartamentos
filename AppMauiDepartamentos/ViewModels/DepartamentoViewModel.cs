@@ -20,7 +20,8 @@ namespace AppMauiDepartamentos.ViewModels
     {
         Repository<Departamento> _repos;
         Repository<Actividad> _reposAct;
-
+        [ObservableProperty]
+        public string departamentoSuperior = "";
         DepartamentoService _service;
         DepartamentoDTOValidator _validator;
         DepartamentoEditarValidator _validatorEditar;
@@ -147,7 +148,7 @@ namespace AppMauiDepartamentos.ViewModels
             }
         }
         [RelayCommand]
-        public void VerEditar(int id)
+        public async void VerEditar(int id)
         {
             var n = _repos.Get(id);
             if(DepartamentoTemporal == null)
@@ -181,6 +182,15 @@ namespace AppMauiDepartamentos.ViewModels
                 //Departamento.Username = n.UserName;
                 //Departamento.Password = "";
                 //Departamento.Id = n.Id;
+                if(DepartamentoTemporal2.Id == 0)
+                {
+                    DepartamentoSuperior = "No tiene superior actualmente";
+                }
+                else
+                {
+                    var depsup = await _service.GetDepartamento(DepartamentoTemporal2.Id);
+                    DepartamentoSuperior = depsup.Nombre??"No tiene superior actualmente";
+                }
                 Error = "";
                 var nuevaVista = new UpdateDepartamentoView();
                 var currentPage = Shell.Current.Navigation.NavigationStack.LastOrDefault();
@@ -205,7 +215,7 @@ namespace AppMauiDepartamentos.ViewModels
                     if(x.Id!= x.Id || x.Id!= 0)
                     {
                         
-                        Departamento.IdSuperior = DepartamentoTemporal2.Id== 0?null:DepartamentoTemporal.Id;
+                        Departamento.IdSuperior = DepartamentoTemporal2.Id== 0?null:DepartamentoTemporal2.Id;
                     }
                     
                     Departamento.Id = DepartamentoTemporal.Id;

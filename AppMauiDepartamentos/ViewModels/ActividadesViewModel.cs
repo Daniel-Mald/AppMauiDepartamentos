@@ -6,6 +6,10 @@ using AppMauiDepartamentos.Services;
 using AppMauiDepartamentos.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+//using CoreTelephony;
+//using Intents;
+//using MetalPerformanceShaders;
+
 //using GoogleGson;
 
 //using MessageUI;
@@ -98,13 +102,17 @@ namespace AppMauiDepartamentos.ViewModels
         public ObservableCollection<ActividadConImagen> Borradores { get; set; }=new();
         List<ImagenConId> Imagenes = new();
 
-
-
-        void ActualizarActividades(bool? cambios)
+        public async Task<int> GetMyId()
         {
+            return await _loginService.GetDepartamentoId();
+        }
 
+        async void ActualizarActividades(bool? cambios)
+        {
+            int MyId = await GetMyId();
             //    Actividades.Clear();
                 var y = _repos.GetAll().ToArray();
+            
             //    foreach (var l in y)
             //    {
             //        Actividades.Add(l);
@@ -123,7 +131,8 @@ namespace AppMauiDepartamentos.ViewModels
                 {
                     Actividad = y[i],
                     //Imagen = (byte[])Convert.FromBase64String(imgs[i].ImagenBase64)
-                    Imagen = (byte[])Convert.FromBase64String(imgs.FirstOrDefault(x => x.Id == y[i].Id).ImagenBase64) ?? null
+                    Imagen = (byte[])Convert.FromBase64String(imgs.FirstOrDefault(x => x.Id == y[i].Id).ImagenBase64) ?? null,
+                    MePertenece = MyId == y[i].IdDepartamento ? true : false
                 };
                 ActividadesImg.Add(x);
             }

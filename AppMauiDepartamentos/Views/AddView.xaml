@@ -5,26 +5,46 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:helpers="clr-namespace:AppMauiDepartamentos.Helpers"
              xmlns:vm="clr-namespace:AppMauiDepartamentos.ViewModels"
+             xmlns:i="clr-namespace:AppMauiDepartamentos.Helpers"
              Title="AddView">
     <!--<ContentPage.BindingContext>
         <vm:ActividadesViewModel></vm:ActividadesViewModel>
     </ContentPage.BindingContext>-->
-    <VerticalStackLayout>
-        <Label Text="Titulo"/>
-        <Entry Text="{Binding Actividad.Titulo}"/>
-        <Label Text="Descripcion"/>
-        <Entry Text="{Binding Actividad.Descripcion}"/>
-        <Label Text="Fecha a realizar"/>
-        <DatePicker Date="{Binding Actividad.FechaRealizacion}"/>
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="5,5"  />
+            <Setter Property="HeightRequest" Value="10"></Setter>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="Medium" />
+            <Setter Property="Margin" Value="10"></Setter>
+
+        </Style>
+    </ContentPage.Resources>
+    <Frame CornerRadius="60" Margin="0" BackgroundColor="{StaticResource Gray900}" MaximumWidthRequest="500" WidthRequest="400" BorderColor="{StaticResource Gray500}" HorizontalOptions="Center" VerticalOptions="Center">
         <VerticalStackLayout>
-            <Button Text="Seleccionar Imagen" Clicked="Button_Clicked"/>
-            <Image x:Name="SelectedImage"  WidthRequest="200" HeightRequest="200"/>
-            <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
+            <Label Style="{StaticResource LabelStyle}" Text="Titulo"/>
+            <Entry  Text="{Binding Actividad.Titulo}"/>
+            <Label Style="{StaticResource LabelStyle}" Text="Descripcion"/>
+            <Entry Text="{Binding Actividad.Descripcion}"/>
+            <Label Style="{StaticResource LabelStyle}" Text="Fecha a realizar"/>
+            <DatePicker Date="{Binding Actividad.FechaRealizacion}"/>
+            <VerticalStackLayout>
+                <Button Text="Seleccionar Imagen" Clicked="Button_Clicked"/>
+                <Image x:Name="SelectedImage"  WidthRequest="200" HeightRequest="200"/>
+                <Entry IsVisible="false" x:Name="Imagen64" Text="{Binding Img}"/>
+            </VerticalStackLayout>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=False}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.Newspaper}"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelarCommand}" FontSize="20" FontFamily="iconoss" Text="{x:Static i:MalditosIconos.CircleLeft}"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=True}" Text="Guardar como borrador"></Button>
+
+
         </VerticalStackLayout>
-        <Button Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=False}" Text="publicar"></Button>
-        <Button Command="{Binding CancelarCommand}" Text="Cancelar"></Button>
-        <Button Command="{Binding AgregarCommand}" CommandParameter="{helpers:BoolExtension Value=True}" Text="Guardar como borrador"></Button>
-
-
-    </VerticalStackLayout>
+    </Frame>
+    
 </ContentPage>

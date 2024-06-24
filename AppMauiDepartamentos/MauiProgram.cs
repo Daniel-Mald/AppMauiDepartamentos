@@ -5,6 +5,9 @@ using AppMauiDepartamentos.ViewModels;
 using AppMauiDepartamentos.Views;
 using Microsoft.Extensions.Logging;
 
+
+
+
 namespace AppMauiDepartamentos
 {
     public static class MauiProgram
@@ -18,11 +21,14 @@ namespace AppMauiDepartamentos
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    fonts.AddFont("fontello.ttf", "Icons");
+                    //fonts.AddFont("fontello.ttf", "Icons");
+                    fonts.AddFont("Font Awesome 6 Free-Regular-400.otf","iconoss");
                 });
+           // builder.UseFluentMauiIcons().UseMaterialMauiIcons().UseCupertinoMauiIcons();
+
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton(typeof(IRepository<>),typeof(Repository<>));
             builder.Services.AddSingleton<Repository<Actividad>>();
