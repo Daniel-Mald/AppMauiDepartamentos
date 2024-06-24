@@ -6,6 +6,7 @@ using AppMauiDepartamentos.Services;
 using AppMauiDepartamentos.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+//using MetalPerformanceShaders;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace AppMauiDepartamentos.ViewModels
 {
     public partial class DepartamentoViewModel:ObservableObject
     {
-        Repository<Departamento> _repos = new();
+        Repository<Departamento> _repos;
         Repository<Actividad> _reposAct;
 
         DepartamentoService _service;
@@ -26,10 +27,12 @@ namespace AppMauiDepartamentos.ViewModels
         ActividadService _activationService;
         //LoginService _loginService;
         public DepartamentoViewModel(DepartamentoService ser ,ActividadService actividadService,
-            Repository<Actividad> ra)
+            Repository<Actividad> ra,
+            Repository<Departamento> rd)
         {
             //_repos = repository;
             //_service = service;
+            _repos = rd;
             _service = ser;
             _reposAct = ra;
             _validator = new(_repos);
@@ -163,7 +166,13 @@ namespace AppMauiDepartamentos.ViewModels
                     }
                     else
                     {
-                        DepartamentoTemporal2 = _repos.Get((int)n.SuperiorId);
+                        int rr = (int)n.SuperiorId;
+
+
+                        DepartamentoTemporal2 = new()
+                        {
+                            Id = rr
+                        };
                         
                     }
                 }
@@ -196,7 +205,7 @@ namespace AppMauiDepartamentos.ViewModels
                     if(x.Id!= x.Id || x.Id!= 0)
                     {
                         
-                        Departamento.IdSuperior = DepartamentoTemporal2.Id;
+                        Departamento.IdSuperior = DepartamentoTemporal2.Id== 0?null:DepartamentoTemporal.Id;
                     }
                     
                     Departamento.Id = DepartamentoTemporal.Id;
